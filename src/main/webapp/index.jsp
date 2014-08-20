@@ -1,5 +1,23 @@
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <body>
-<h2>Hello World!</h2>
+<h1>Welcome to Redis Administrator...!!!!!</h1>
+<div class="main">
+    <div class="leftsidebar">Left</div>
+    <div class="centre">
+        <div id="login">
+            <div id="triangle"></div>
+            <h1>Log in</h1>
+            <form action="login" method="post">
+                <input type="email" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" />
+                <input type="submit" value="Log in" />
+            </form>
+        </div>
+    </div>
+    <div class="rightsidebar">Right Side</div>
+</div>
 </body>
 </html>

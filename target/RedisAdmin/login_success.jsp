@@ -22,6 +22,9 @@
         <div class="header" >
             Welcome to RedimAdmin
         </div>
+        <div class="databox">
+
+        </div>
         <div class="footer" >
 
         </div>
