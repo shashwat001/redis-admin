@@ -12,6 +12,10 @@
         <servlet-name>RegisterUserServlet</servlet-name>
         <servlet-class>org.redisadmin.controller.RegisterUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddServerServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.AddServerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -19,5 +23,9 @@
     <servlet-mapping>
         <servlet-name>RegisterUserServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddServerServlet</servlet-name>
+        <url-pattern>/addServer</url-pattern>
     </servlet-mapping>
 </web-app>

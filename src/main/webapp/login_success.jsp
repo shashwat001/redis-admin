@@ -22,19 +22,17 @@
        <ul>
            <li>
                <a id="addserverlink" href="#">Adding a server</a>
-               <div class="addServerContent">
+               <form name="addServerContent" class="addServerContent" style="display: none">
                    <input type="text" name="hostname" placeholder="Host"/><br>
                    <input type="text" name="port" placeholder="Port"/><br>
-                   <input type="password" name="password" placeholder="**********"/>
-                   <p class="btn">
-                       <input type="button" value="Add"/>
-                   </p>
-                   <i class="ctop">&nbsp;</i>
-                   <i class="cbottom">&nbsp;</i>
-               </div>
+                   <div class="btn">
+                       <input type="button" value="Add" onclick="addserver();"/>
+                   </div>
+                   <div id="addserverdisplay" style="display: none"></div>
+               </form>
            </li>
            <li>
-               <a href="#">Listing all instances of server</a>
+               <a href="#">Connect to a server</a>
            </li>
        </ul>
     </div>
