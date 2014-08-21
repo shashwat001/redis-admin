@@ -17,8 +17,13 @@
     </header>
     <div class="leftsidebar">
        <ul>
-           <li>Listing all instances of server</li>
-           <li>Adding a server</li>
+           <li>
+               <a href="#">Adding a server</a>
+           </li>
+           <li>
+               <a href="#">Listing all instances of server</a>
+           </li>
+
        </ul>
     </div>
     <div class="centre">
