@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css" >
+    <link rel="stylesheet" type="text/css" href="css/style.css" >
+    <link rel="stylesheet" type="text/css" href="css/screen.css" >
     <title>Welcome User</title>
 </head>
 <body>
@@ -17,8 +18,24 @@
     </header>
     <div class="leftsidebar">
        <ul>
-           <li>Listing all instances of server</li>
-           <li>Adding a server</li>
+           <li>Adding a server
+               <div class="addServerContent">
+                   <p class="addserverbox">Add Server Instance</p>
+                   <div class="warning"><p>Error in server configuration</p><p class="c">&nbsp;</p></div>
+                   <input type="text" placeholder="Username"/>
+                   <input type="text" placeholder="*******"/>
+                   <p class="btn">
+                       <input type="button" value="Login"/>
+                   </p>
+                   <ul class="nav-path">
+                       <li><a href="#">Remove instance</a></li>
+                       <li><a href="#">Create instance</a></li>
+                   </ul>
+                   <i class="ctop">&nbsp;</i>
+                   <i class="cbottom">&nbsp;</i>
+               </div>
+           </li>
+           <li>List all server instances</li>
        </ul>
     </div>
     <div class="centre">

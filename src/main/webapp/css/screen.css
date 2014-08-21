@@ -1,0 +1,20 @@
+.addServerContent {background:url(img/form.png) repeat-y;padding:13px 0 25px 0;margin-top:18px;position:relative;}
+.addServerContent .addserverbox {background:url(img/login-box.png) no-repeat;color:#fff;font-size:14px;font-weight:bold;text-transform:uppercase;
+    width:93px;padding:14px 0 14px 16px;margin-bottom:11px;position:relative;left:-4px;float:left;}
+.addServerContent .warning {background:url(img/warning.png) no-repeat;height:28px;padding:0 0 0 34px;margin:7px 0px 0 113px;position:relative;}
+.addServerContent .warning p {background:url(img/warning-p.png) repeat-x left center;color:#c51f00;font-size:11px;height:19px;font-weight:bold;padding:9px 6px 0 0;float:left;}
+.addServerContent .warning p.c {background:url(img/warning-p.c.png) no-repeat right center;text-indent:-1000px;padding:0 0 0 0;height:28px;width:2px;}
+.addServerContent input {background:url(img/input.png) no-repeat;color:#5d5d5d;font-size:12px;font-style:italic;
+    width:322px;height:43px;padding-left:18px;margin:0 0 16px 40px;border:none;clear:left;}
+.addServerContent .btn {padding-bottom:0;float:left;}
+.addServerContent .btn input{background:url(img/p.btn-input.png) no-repeat;color:#fff;font-size:12px;font-weight:bold;text-transform:uppercase;font-style:normal;text-indent:-1000px;
+    width:111px;line-height:43px;padding:0;margin:0 0 0 40px;border:none;cursor:pointer;float:left;}
+.addServerContent .btn input:hover{background:url(img/p.btn-input.hover.png) no-repeat;}
+.addServerContent .nav-path{margin-left:162px;}
+.addServerContent .nav-path li{line-height:19px;}
+.addServerContent .nav-path li a{color:#005fa2;font-size:11px;}
+.addServerContent .nav-path li a:hover{text-decoration:none;}
+
+.c2 {background:url(img/warning.png) no-repeat top left;position:absolute;top:0;left:50px;height:28px;width:2px;}
+.ctop {background:url(img/ctop.png) no-repeat;width:426px;height:6px;position:absolute;top:-6px;left:0;}
+.cbottom {background:url(img/cbottom.png) no-repeat;width:426px;height:6px;position:absolute;bottom:-6px;left:0;}

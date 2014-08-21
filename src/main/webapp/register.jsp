@@ -1,6 +1,6 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" >
         function validateForm(obj){
             var passwd = obj["password"].value;
