@@ -12,6 +12,9 @@
     <title>Welcome User</title>
 </head>
 <body>
+    <header>
+        Welcome to Redis Admin...!!!!
+    </header>
     <div class="leftsidebar">
        <ul>
            <li>Listing all instances of server</li>
@@ -19,18 +22,6 @@
        </ul>
     </div>
     <div class="centre">
-        <div class="header" >
-            Welcome to RedimAdmin
-        </div>
-        <div class="databox">
-
-        </div>
-        <div class="footer" >
-
-        </div>
-    </div>
-    <div class="rightsidebar">
-
     </div>
 </body>
 </html>

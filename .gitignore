@@ -1,3 +1,5 @@
 RedisAdmin.iml
 .idea/workspace.xml
 *~
+*.class
+target/*
