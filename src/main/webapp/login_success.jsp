@@ -8,7 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css" >
+    <link rel="stylesheet" type="text/css" href="css/style.css" >
+    <link rel="stylesheet" type="text/css" href="css/screen.css" >
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>
+    <script src="js/server.js" type="text/javascript"></script>
     <title>Welcome User</title>
 </head>
 <body>
@@ -18,19 +21,14 @@
     <div class="leftsidebar">
        <ul>
            <li>
-               <a href="#">Adding a server</a>
+               <a id="addserverlink" href="#">Adding a server</a>
                <div class="addServerContent">
-                   <p class="addserverbox">Add Server Instance</p>
-                   <div class="warning"><p>Error in server configuration</p><p class="c">&nbsp;</p></div>
-                   <input type="text" placeholder="Username"/>
-                   <input type="text" placeholder="*******"/>
+                   <input type="text" name="hostname" placeholder="Host"/><br>
+                   <input type="text" name="port" placeholder="Port"/><br>
+                   <input type="password" name="password" placeholder="**********"/>
                    <p class="btn">
-                       <input type="button" value="Login"/>
+                       <input type="button" value="Add"/>
                    </p>
-                   <ul class="nav-path">
-                       <li><a href="#">Remove instance</a></li>
-                       <li><a href="#">Create instance</a></li>
-                   </ul>
                    <i class="ctop">&nbsp;</i>
                    <i class="cbottom">&nbsp;</i>
                </div>
