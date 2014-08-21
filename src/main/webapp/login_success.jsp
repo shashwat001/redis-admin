@@ -8,8 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css" >
-    <link rel="stylesheet" type="text/css" href="css/screen.css" >
+    <link rel="stylesheet" type="text/css" href="style.css" >
     <title>Welcome User</title>
 </head>
 <body>
@@ -18,7 +17,8 @@
     </header>
     <div class="leftsidebar">
        <ul>
-           <li>Adding a server
+           <li>
+               <a href="#">Adding a server</a>
                <div class="addServerContent">
                    <p class="addserverbox">Add Server Instance</p>
                    <div class="warning"><p>Error in server configuration</p><p class="c">&nbsp;</p></div>
@@ -35,7 +35,9 @@
                    <i class="cbottom">&nbsp;</i>
                </div>
            </li>
-           <li>List all server instances</li>
+           <li>
+               <a href="#">Listing all instances of server</a>
+           </li>
        </ul>
     </div>
     <div class="centre">
