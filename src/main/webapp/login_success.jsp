@@ -10,8 +10,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css" >
     <link rel="stylesheet" type="text/css" href="css/screen.css" >
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>
     <script src="js/server.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
     <title>Welcome User</title>
 </head>
 <body>
@@ -32,11 +34,34 @@
                </form>
            </li>
            <li>
-               <a href="#">Connect to a server</a>
+               <a href="#" onclick="displayservers()">Connect to a server</a>
+               <div id="displayserverlist" style="display: none">
+
+               </div>
            </li>
        </ul>
     </div>
     <div class="centre">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a data-toggle="tab" href="#sectionA">Home</a></li>
+            <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
+            <li><a data-toggle="tab" href="#sectionC">Messages</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="sectionA" class="tab-pane fade in active">
+                <h3>Section A</h3>
+                <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+            </div>
+            <div id="sectionB" class="tab-pane fade">
+                <h3>Section B</h3>
+                <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+            </div>
+            <div id="sectionC" class="tab-pane fade">
+                <h3>Section B</h3>
+                <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

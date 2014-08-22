@@ -29,3 +29,28 @@ function addserver(){
         }
     });
 }
+
+function displayservers() {
+    $.ajax({
+        type: "POST",
+        url: "/getServerList",
+        success: function(html){
+            if(html!='false')    {
+                var jsonObject = jQuery.parseJSON(html);
+                var outputList = "";
+                outputList += "<ul>";
+                for(var i = 0; i < jsonObject.length;i++){
+                    var host = jsonObject[i].host;
+                    var port = jsonObject[i].port;
+                    outputList += "<li>" + host +":" + port + "</li>";
+                }
+                outputList += "</ul>";
+                $("#displayserverlist").html(outputList);
+            }
+            else    {
+                $("#displayserverlist").html("Error in gettling list");
+            }
+            $("#displayserverlist").css('display', 'block');
+        }
+    });
+}
