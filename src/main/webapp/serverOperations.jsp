@@ -12,8 +12,8 @@
     <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">List Keys <b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a data-toggle="tab" href="list/listall.jsp"> ">All Keys</a></li>
-            <li><a data-toggle="tab" href="list/strings.jsp">Strings</a></li>
+            <li><a data-toggle="tab" href="#"> ">All Keys</a></li>
+            <li><a data-toggle="tab" href="/stringKeys">Strings</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Hashes</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Lists</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Sets</a></li>

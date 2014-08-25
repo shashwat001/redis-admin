@@ -49,6 +49,5 @@ public class Server {
             serverList.add(new Server(host,port));
         }
         return serverList;
-
     }
 }

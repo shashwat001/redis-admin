@@ -20,6 +20,10 @@
         <servlet-name>GetServerListServlet</servlet-name>
         <servlet-class>org.redisadmin.controller.GetServerListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListKeysServlet</servlet-name>
+        <servlet-class>org.redisadmin.view.ListKeysServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -35,5 +39,9 @@
     <servlet-mapping>
         <servlet-name>GetServerListServlet</servlet-name>
         <url-pattern>/getServerList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListKeysServlet</servlet-name>
+        <url-pattern>/stringKeys</url-pattern>
     </servlet-mapping>
 </web-app>
