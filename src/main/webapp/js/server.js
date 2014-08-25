@@ -42,7 +42,7 @@ function displayservers() {
                 for(var i = 0; i < jsonObject.length;i++){
                     var host = jsonObject[i].host;
                     var port = jsonObject[i].port;
-                    outputList += "<li>" + host +":" + port + "</li>";
+                    outputList += "<li><a href=\"#\" onclick='getServerOperations(this)'>" + host +":" + port + "</a></li>";
                 }
                 outputList += "</ul>";
                 $("#displayserverlist").html(outputList);
@@ -51,6 +51,20 @@ function displayservers() {
                 $("#displayserverlist").html("Error in gettling list");
             }
             $("#displayserverlist").css('display', 'block');
+        }
+    });
+}
+
+function getServerOperations(obj){
+    var list = obj.innerHTML.split(":");
+    var host = list[0];
+    var port = list[1];
+    $.ajax({
+        type: "GET",
+        url: "serverOperations.jsp",
+        data: "host="+host+"&port="+port,
+        success: function(html){
+            $('.centre').html(html);
         }
     });
 }
