@@ -39,6 +39,7 @@ public class RedisAccessModel {
             nextCursor = scanResult.getStringCursor();
             for (String s : scanResult.getResult()) {
                 keyList.add(new Pair<String, String>(s, jedis.type(s)));
+            System.out.println("count = "+ count++);
             }
         }
         while(!nextCursor.equals("0"));

@@ -25,6 +25,7 @@ public class ListKeysServlet extends HttpServlet {
         cookies = request.getCookies();
         String host = cookies[0].getValue();
         int port = Integer.parseInt(cookies[1].getValue());
+        System.out.println("host = "+ host + "prt = "+ port);
         List<String> stringKeys = new ListKeys().listStringKeys(host, port);
         for(String key : stringKeys){
             out.write(key);

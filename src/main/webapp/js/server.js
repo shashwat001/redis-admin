@@ -68,3 +68,10 @@ function getServerOperations(obj){
         }
     });
 }
+
+function fetchData(obj) {
+    var tag = obj.getAttribute("href");
+    $.get( "/stringKeys", function( data ) {
+        $( tag ).text( data );
+    });
+}

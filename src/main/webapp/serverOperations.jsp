@@ -1,8 +1,10 @@
-<%
+<%@ page import="java.io.Console" %><%
     String host = request.getParameter("host");
     String port = request.getParameter("port");
     Cookie hostCookie = new Cookie("host",host);
     Cookie portCookie = new Cookie("port",port);
+    Object console;
+    console.l
     response.addCookie(hostCookie);
     response.addCookie(portCookie);
 
@@ -13,7 +15,7 @@
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">List Keys <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a data-toggle="tab" href="#">All Keys</a></li>
-            <li><a data-toggle="tab" href="stringKeys">Strings</a></li>
+            <li><a data-toggle="tab" href="#dropdownString" onclick="fetchData(this)">Strings</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Hashes</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Lists</a></li>
             <li><a data-toggle="tab" href="#dropdown2">Sets</a></li>
@@ -41,5 +43,8 @@
     <div id="sectionC" class="tab-pane fade">
         <h3>Section C</h3>
         <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+    </div>
+    <div id="dropdownString" class="tab-pane fade">
+        <%--<jsp:include page="/stringKeys" flush="true" />--%>
     </div>
 </div>

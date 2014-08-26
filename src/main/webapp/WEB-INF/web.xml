@@ -42,6 +42,6 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListKeysServlet</servlet-name>
-        <url-pattern>/stringKeys/*</url-pattern>
+        <url-pattern>/stringKeys</url-pattern>
     </servlet-mapping>
 </web-app>
