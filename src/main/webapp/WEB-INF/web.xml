@@ -22,8 +22,18 @@
     </servlet>
     <servlet>
         <servlet-name>ListKeysServlet</servlet-name>
-        <servlet-class>org.redisadmin.view.ListKeysServlet</servlet-class>
+        <servlet-class>org.redisadmin.controller.ListKeysServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetKeyValuesServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.GetKeyValuesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddKeyValueServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.AddKeyValueServlet</servlet-class>
+    </servlet>
+
+
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -42,6 +52,14 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListKeysServlet</servlet-name>
-        <url-pattern>/stringKeys/*</url-pattern>
+        <url-pattern>/listKeys</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetKeyValuesServlet</servlet-name>
+        <url-pattern>/getValue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddKeyValueServlet</servlet-name>
+        <url-pattern>/addValue</url-pattern>
     </servlet-mapping>
 </web-app>

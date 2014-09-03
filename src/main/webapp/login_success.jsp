@@ -10,11 +10,14 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css" >
     <link rel="stylesheet" type="text/css" href="css/screen.css" >
+    <link rel="stylesheet" type="text/css" href="css/insert.css" >
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
     <script src="js/server.js" type="text/javascript"></script>
+    <script src="js/insert.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/search.js" type="text/javascript"></script>
     <title>Welcome User</title>
 </head>
 <body>

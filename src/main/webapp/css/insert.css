@@ -1,0 +1,14 @@
+.insertButtons {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.target{
+    margin-top: 50px;
+}
+.target > div {
+    display:none;
+}
+
+.target > div:target{
+    display:block;
+}
