@@ -72,13 +72,13 @@ public class GetKeyValuesServlet extends HttpServlet {
     }
 
     private String getSetJSON(RedisAccessModel redisAccessModel, String key) {
-        Set<String> valueSet = redisAccessModel.getSetValue(key);
+        List<String> valueSet = redisAccessModel.getSetValue(key);
         String JSONvalue = new Gson().toJson(valueSet);
         return JSONvalue;
     }
 
     private String getZsetJSON(RedisAccessModel redisAccessModel, String key) {
-        Set<Tuple> valueZset = redisAccessModel.getZsetValue(key);
+        List<Tuple> valueZset = redisAccessModel.getZsetValue(key);
         String JSONvalue = new Gson().toJson(valueZset);
         return JSONvalue;
     }

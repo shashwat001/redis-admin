@@ -30,6 +30,14 @@ function addserver(){
     });
 }
 
+//setInterval(refreshDisplayservers,"2000");
+
+function refreshDisplayservers(){
+    if($("#displayserverlist").css('display') == "block"){
+        displayservers();
+    }
+}
+
 function displayservers() {
     $.ajax({
         type: "POST",
@@ -42,7 +50,12 @@ function displayservers() {
                 for(var i = 0; i < jsonObject.length;i++){
                     var host = jsonObject[i].host;
                     var port = jsonObject[i].port;
-                    outputList += "<li><a href=\"#\" onclick='getServerOperations(this)'>" + host +":" + port + "</a></li>";
+                    if(jsonObject[i].active==true) {
+                        outputList += "<li><a style='color: blue' href=\"#\" onclick='getServerOperations(this)'>" + host + ":" + port + "</a></li>";
+                    }
+                    else{
+                        outputList += "<li><span style='color: red;' >" + host + ":" + port + "</span></li>";
+                    }
                 }
                 outputList += "</ul>";
                 $("#displayserverlist").html(outputList);
@@ -154,10 +167,14 @@ function cellSelected(obj){
     var tableNode = obj.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
 //    alert(tableNode.rows[0].cells[1].innerHTML);
     var keyName = obj.innerHTML;
+    putKeyValueInModifyingElement(keyName,curKeyType,tableNode.rows[0].cells[1]);
+}
+
+function putKeyValueInModifyingElement(key,curKeyType,modifyingElement){
     $.ajax({
         type: "GET",
         url: "/getValue",
-        data: "key="+keyName+"&type="+curKeyType,
+        data: "key="+key+"&type="+curKeyType,
         success: function(keys){
             var returnHTML = "";
             if(curKeyType == "STRING"){
@@ -176,7 +193,7 @@ function cellSelected(obj){
                 returnHTML = getZsetHTML(keys);
             }
 
-            tableNode.rows[0].cells[1].innerHTML = returnHTML;
+            modifyingElement.innerHTML = returnHTML;
         }
     });
 }

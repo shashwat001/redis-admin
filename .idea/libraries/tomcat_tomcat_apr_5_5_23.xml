@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="tomcat:tomcat-apr:5.5.23" type="repository">
+    <properties maven-id="tomcat:tomcat-apr:5.5.23" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-apr-5.5.23.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

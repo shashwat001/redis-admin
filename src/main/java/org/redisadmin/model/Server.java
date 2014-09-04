@@ -16,10 +16,14 @@ import java.util.List;
 public class Server {
     String host;
     int port;
+    boolean active;
 
     public Server(String host, int port) {
         this.host = host;
         this.port = port;
+
+        active = RedisAccessModel.isActive(host,port);
+
     }
 
     public void add() throws SQLException, ClassNotFoundException {

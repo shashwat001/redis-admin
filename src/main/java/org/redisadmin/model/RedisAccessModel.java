@@ -44,6 +44,18 @@ public class RedisAccessModel {
         }
     }
 
+    public static boolean isActive(String host,int port){
+        try {
+            JedisPool jedisPool = new JedisPool(host, port);
+            jedisPool.getResource();
+            return true;
+        }
+        catch (JedisException e){
+            return false;
+        }
+
+    }
+
     public void close(){
         jedis.close();
     }
@@ -144,14 +156,32 @@ public class RedisAccessModel {
         return valueList;
     }
 
-    public Set<String> getSetValue(String key){
-        Set<String> smembers = jedis.smembers(key);
-        return smembers;
+    public List<String> getSetValue(String key){
+        String nextCursor = "0";
+        List<String> result = new ArrayList<String>();
+        do{
+            ScanResult<String> scanResult = jedis.sscan(key, nextCursor);
+            List<String> strings = scanResult.getResult();
+            result.addAll(strings);
+
+            nextCursor = scanResult.getStringCursor();
+        }
+        while (!nextCursor.equals("0"));
+        return result;
     }
 
-    public Set<Tuple> getZsetValue(String key){
-        Set<Tuple> tuples = jedis.zrangeWithScores(key, 0, -1);
-        return tuples;
+    public List<Tuple> getZsetValue(String key){
+        String nextCursor = "0";
+        List<Tuple> result = new ArrayList<Tuple>();
+        do{
+            ScanResult<Tuple> scanResult = jedis.zscan(key, nextCursor);
+            List<Tuple> tuples = scanResult.getResult();
+            result.addAll(tuples);
+
+            nextCursor = scanResult.getStringCursor();
+        }
+        while (!nextCursor.equals("0"));
+        return result;
     }
 
     public Status addStringKeyValue(String key, String value) {
@@ -195,6 +225,23 @@ public class RedisAccessModel {
         for(Tuple value : values)
             jedis.zadd(key,value.getScore(),value.getElement());
         return Status.SUCCESS;
+    }
+
+    public List<RedisKey> getExactMatchingKeys(String key) {
+        List<RedisKey> returnList = new LinkedList<RedisKey>();
+        if(jedis.exists(key)){
+            RedisKey redisKey = new RedisKey(key,null,jedis.type(key));
+            returnList.add(redisKey);
+        }
+        return returnList;
+    }
+
+    public List<RedisKey> getRegexMatchingKeys(String key) {
+        List<RedisKey> returnList = new LinkedList<RedisKey>();
+        for(String keyname : jedis.keys(key)){
+            returnList.add(new RedisKey(keyname,null,jedis.type(keyname)));
+        }
+        return returnList;
     }
 }
 

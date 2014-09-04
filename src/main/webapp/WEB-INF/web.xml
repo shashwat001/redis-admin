@@ -32,6 +32,10 @@
         <servlet-name>AddKeyValueServlet</servlet-name>
         <servlet-class>org.redisadmin.controller.AddKeyValueServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchKeyServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.SearchKeyServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -61,5 +65,9 @@
     <servlet-mapping>
         <servlet-name>AddKeyValueServlet</servlet-name>
         <url-pattern>/addValue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchKeyServlet</servlet-name>
+        <url-pattern>/search/*</url-pattern>
     </servlet-mapping>
 </web-app>
