@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 /**
@@ -14,18 +15,20 @@ import java.sql.SQLException;
  */
 public class RegisterUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String name = request.getParameter("username");
-            String email = request.getParameter("email");
-            String passwd = request.getParameter("password");
-            User user = new User(name,email,passwd);
-            user.register();
-            response.sendRedirect("index.jsp");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        PrintWriter out = response.getWriter();
+        String name = request.getParameter("name");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user = new User(name,username,password);
+        if(!user.validateConstraints()){
+            out.write("0");
+            return;
         }
+        if(user.register())
+            out.write("2");
+        else
+            out.write("1");
+        out.close();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

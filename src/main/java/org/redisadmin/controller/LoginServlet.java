@@ -1,32 +1,53 @@
 package org.redisadmin.controller;
 
+import org.apache.log4j.Logger;
 import org.redisadmin.model.User;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 
 /**
  * Created by deepak on 20/8/14.
  */
 public class LoginServlet extends javax.servlet.http.HttpServlet {
+    public static final Logger logger = Logger.getLogger(LoginServlet.class);
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User loginUser = new User(email,password);
+        PrintWriter out = response.getWriter();
 
-        try {
-            if(loginUser.validate()){
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("login_success.jsp");
-                requestDispatcher.forward(request,response);
+        if(request.getSession().getAttribute("username") != null){
+            out.write("true");
+        }
+        else {
+            logger.info("New user logging in");
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            logger.info("Username :" + username + " Password : " + password);
+            User loginUser = new User(username, password);
+
+            if (loginUser.authenticate()) {
+                logger.info("User valid, Name : " + loginUser.getName());
+                HttpSession session = request.getSession();
+                session.setAttribute("name", loginUser.getName());
+                session.setAttribute("username", loginUser.getUsername());
+                if(loginUser.isAdmin()){
+                    session.setAttribute("admin",1);
+                }
+                session.setMaxInactiveInterval(60 * 60 * 6);//6 hrs
+
+                logger.info("User logging in, redirecting to login_success.jsp");
+                out.write("true");
             }
             else {
-                response.sendRedirect("index.jsp");
+                logger.info("Invalid User");
+                out.write("false");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            out.close();
+
+
         }
     }
 

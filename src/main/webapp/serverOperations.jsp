@@ -24,8 +24,7 @@
     <%--<li class="active"><a data-toggle="tab" href="#sectionA">List Keys</a></li>--%>
     <li><a data-toggle="tab" href="#tabSearch" onclick="actionSearch('tabSearch')" >Search</a></li>
     <li><a data-toggle="tab" href="#tabInsert" onclick="actionInsert('tabInsert')" >Insert</a></li>
-    <li><a data-toggle="tab" href="#sectionC">Update</a></li>
-    <li><a data-toggle="tab" href="#sectionC">Delete</a></li>
+    <li><a data-toggle="tab" href="#tabInfo" onclick="actionInfo('tabInfo')" >Info</a></li>
 </ul>
 
 <div class="tab-content">
@@ -39,9 +38,7 @@
     <div id="tabInsert" class="tab-pane fade">
 
     </div>
-    <div id="sectionC" class="tab-pane fade">
-        <h3>Section C</h3>
-        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+    <div id="tabInfo" class="tab-pane fade">
     </div>
 
 

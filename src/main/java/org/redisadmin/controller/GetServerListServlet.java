@@ -1,6 +1,7 @@
 package org.redisadmin.controller;
 
 import com.google.gson.Gson;
+import org.apache.log4j.Logger;
 import org.redisadmin.model.Server;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,14 @@ import java.util.List;
  * Created by shashwat001 on 21/8/14.
  */
 public class GetServerListServlet extends HttpServlet {
+    public static final Logger logger = Logger.getLogger(GetServerListServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("Entering "+GetServerListServlet.class);
         PrintWriter out = response.getWriter();
         try {
             List<Server> serverList = Server.getServerList();
@@ -31,10 +39,7 @@ public class GetServerListServlet extends HttpServlet {
         }
         finally {
             out.close();
+            logger.info("Leaving "+GetServerListServlet.class);
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

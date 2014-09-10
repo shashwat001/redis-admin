@@ -60,6 +60,47 @@ public class RedisAccessModel {
         jedis.close();
     }
 
+    public void deleteKey(String key){
+        jedis.del(key);
+    }
+
+    public Map<String, Map<String, String>> getInfo(){
+        String info = jedis.info();
+        info = info.trim();
+        String[] infoPerElement = info.split("#");
+
+        Map<String,Map<String,String>> infoMap = getInfoAsMap(infoPerElement);
+        return infoMap;
+    }
+
+    private Map<String, Map<String, String>> getInfoAsMap(String[] infoPerElement) {
+
+        Map<String,Map<String,String>> returnMap = new HashMap<String, Map<String, String>>();
+        for(String info : infoPerElement){
+            if(info.equals(""))
+                continue;
+            String[] infoArray = info.split("\r\n");
+            Map<String,String> ElementInfo = new HashMap<String, String>();
+            for (int i = 1; i < infoArray.length; i++) {
+                String[] infoValue = infoArray[i].split(":");
+                ElementInfo.put(infoValue[0],infoValue[1]);
+            }
+
+            returnMap.put(infoArray[0], ElementInfo);
+        }
+        return returnMap;
+    }
+
+    private Map<String, String> getMapFromStringInfo(String info) {
+        String[] infoArray = info.split(" ");
+        Map<String,String> ElementInfo = new HashMap<String, String>();
+        for (int i = 0; i < infoArray.length; i++) {
+            String[] infoValue = infoArray[i].split(":");
+            ElementInfo.put(infoValue[0],infoValue[1]);
+        }
+
+        return ElementInfo;
+    }
 
 
     public RedisKeyState getNextKeyState(RedisKeyState currentRedisKeyState) {

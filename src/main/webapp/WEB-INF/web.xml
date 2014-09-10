@@ -36,6 +36,22 @@
         <servlet-name>SearchKeyServlet</servlet-name>
         <servlet-class>org.redisadmin.controller.SearchKeyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteKeyServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.DeleteKeyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetInfoServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.GetInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>org.redisadmin.controller.DeleteServerServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -69,5 +85,21 @@
     <servlet-mapping>
         <servlet-name>SearchKeyServlet</servlet-name>
         <url-pattern>/search/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteKeyServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetInfoServlet</servlet-name>
+        <url-pattern>/info</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/deleteServer</url-pattern>
     </servlet-mapping>
 </web-app>

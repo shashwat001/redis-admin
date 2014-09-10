@@ -3,9 +3,9 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" >
         function validateForm(obj){
-            var passwd = obj["password"].value;
+            var password = obj["password"].value;
             var confirmPasswd = obj["confirmPassword"].value;
-            if(passwd == confirmPasswd) {
+            if(password == confirmPasswd) {
                 return true;
             }
             obj["password"].style.borderColor="red";
@@ -24,7 +24,7 @@
             <h1>Register</h1>
             <form  name="registerForm" action="/register" method="post" onsubmit="return validateForm(this);">
                 <input type="text" name="username" placeholder="Name" />
-                <input type="email" name="email" placeholder="Email" />
+                <input type="username" name="username" placeholder="Email" />
                 <input type="password" name="password" placeholder="Password" />
                 <input type="password" name="confirmPassword" placeholder="Confirm Password" />
                 <input type="submit" value="Register" />
