@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 /**
  * Created by shashwat001 on 21/8/14.
  */
-public class Server {
+public class Server extends Object {
     String host;
     int port;
-    boolean active;
+    boolean active = true;
 
     public static final Logger logger = Logger.getLogger(String.valueOf(Server.class));
 
@@ -27,19 +27,34 @@ public class Server {
         this.host = host;
         this.port = port;
 
-        active = RedisAccessModel.isActive(host,port);
+//        active = RedisAccessModel.isActive(host,port);
 
     }
 
-    public void add() throws SQLException, ClassNotFoundException {
+    public String toString(){
+        return host+":"+port;
+    }
 
-        String sql = "insert into servers (host, port) values(?,?)";
-        Connection connection = Database.getConnection();
+    public boolean add() {
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,host);
-        preparedStatement.setInt(2,port);
-        int status = preparedStatement.executeUpdate();
+
+        try {
+            String sql = "insert into servers (host, port) values(?,?)";
+            Connection connection = Database.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,host);
+            preparedStatement.setInt(2,port);
+            int status = preparedStatement.executeUpdate();
+            if(status == 1){
+                return true;
+            }
+            return false;
+
+        } catch (SQLException e) {
+            return false;
+        }
+
     }
 
     public static List<Server> getServerList() throws SQLException, ClassNotFoundException {

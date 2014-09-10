@@ -27,23 +27,14 @@ public class ListKeysServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("Entering ListKeysServlet");
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
-
-        //cookies 0:jsessiodID 1:host 2:port
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
-        logger.info("Host:"+host+"  Port: "+port);
-
 
         String cursor = request.getParameter("cursor");
         int count = Integer.parseInt(request.getParameter("ignorableCount"));
         String keyType = request.getParameter("type");
         RedisKeyState currentRedisKeyState = new RedisKeyState(cursor,count,keyType);
 
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
+        RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(request.getSession());
         RedisKeyState nextRedisKeyState = redisAccessModel.getNextKeyState(currentRedisKeyState);
-        redisAccessModel.close();
 
         String jsonRedisKeys = new Gson().toJson(nextRedisKeyState);
         out.write(jsonRedisKeys);

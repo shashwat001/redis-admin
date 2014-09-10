@@ -24,14 +24,8 @@ public class SearchKeyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
 
-        //cookies 0:jsessiodID 1:host 2:port
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
-
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
+        RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(request.getSession());
 
         String key = request.getParameter("key");
         List<RedisKey> resultKeys = new LinkedList<RedisKey>();

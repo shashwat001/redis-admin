@@ -44,6 +44,19 @@ public class RedisAccessModel {
         }
     }
 
+    public RedisAccessModel(Server server) {
+        this.host = server.host;
+        this.port = server.port;
+        try {
+            JedisPool jedisPool = new JedisPool(host,port);
+            jedis = jedisPool.getResource();
+            logger.info("Jedis Connected");
+        }
+        catch (JedisException e){
+            logger.info("Jedis connection failed");
+        }
+    }
+
     public static boolean isActive(String host,int port){
         try {
             JedisPool jedisPool = new JedisPool(host, port);

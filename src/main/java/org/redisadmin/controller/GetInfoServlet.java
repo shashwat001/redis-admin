@@ -3,6 +3,7 @@ package org.redisadmin.controller;
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import org.redisadmin.model.RedisAccessModel;
+import org.redisadmin.model.Server;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -26,22 +27,20 @@ public class GetInfoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+        try {
+            UserSession.GeneralUserLoginValidation(request.getSession());
+            RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(request.getSession());
+            Map<String, Map<String, String>> info = redisAccessModel.getInfo();
 
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
+            String outputJSON = new Gson().toJson(info);
+            logger.info(outputJSON);
+            out.write(outputJSON);
+        } catch (NoGeneralUserLoginException e) {
+            out.write("nologin");
+        }
 
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
-
-        Map<String, Map<String, String>> info = redisAccessModel.getInfo();
-
-        String outputJSON = new Gson().toJson(info);
-        logger.info(outputJSON);
-        out.write(outputJSON);
-
-        out.close();
-
-
+        finally {
+            out.close();
+        }
     }
 }

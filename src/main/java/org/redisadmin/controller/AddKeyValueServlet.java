@@ -3,14 +3,12 @@ package org.redisadmin.controller;
 import org.apache.log4j.Logger;
 import org.redisadmin.model.RedisAccessModel;
 import org.redisadmin.model.RedisKey;
+import org.redisadmin.model.Server;
 import org.redisadmin.model.Status;
 import redis.clients.jedis.Tuple;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -27,45 +25,52 @@ public class AddKeyValueServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("Entering AddKeyValueServlet");
 
+
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
-
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
-        logger.info("Host:"+host+"  Port: "+port);
-
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
+        try {
+            HttpSession session = request.getSession();
+            UserSession.GeneralUserLoginValidation(session);
+            RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(session);
 
 
-        String keyType = request.getParameter("type");
-        logger.info("keyType : "+ keyType);
+            String keyType = request.getParameter("type");
+            logger.info("keyType : "+ keyType);
 
-        Status status = null;
-        if(keyType.equals("STRING")){
-            RedisKey<String> redisKeyValue = getStringKeyValueFromRequest(request);
-            status = redisAccessModel.addStringKeyValue(redisKeyValue.key, redisKeyValue.value);
+            Status status = null;
+            if(keyType.equals("STRING")){
+                RedisKey<String> redisKeyValue = getStringKeyValueFromRequest(request);
+                status = redisAccessModel.addStringKeyValue(redisKeyValue.key, redisKeyValue.value);
+            }
+            else if(keyType.equals("HASH")){
+                RedisKey<Map<String,String>> redisKeyValue = getHashKeyValueFromRequest(request);
+                status = redisAccessModel.addHashKeyValue(redisKeyValue.key,redisKeyValue.value);
+            }
+            else if(keyType.equals("LIST")){
+                RedisKey<List<String>> redisKeyValue = getListKeyValueFromRequest(request);
+                status = redisAccessModel.addListKeyValue(redisKeyValue.key,redisKeyValue.value);
+            }
+            else if(keyType.equals("SET")){
+                RedisKey<Set<String >> redisKeyValue = getSetKeyValueFromRequest(request);
+                status = redisAccessModel.addSetKeyValue(redisKeyValue.key,redisKeyValue.value);
+            }
+            else if(keyType.equals("ZSET")){
+                RedisKey<Set<Tuple>> redisKeyValue = getZsetKeyValueFromRequest(request);
+                status = redisAccessModel.addZsetKeyValue(redisKeyValue.key, redisKeyValue.value);
+            }
+            logger.info(status);
+            out.println(status.getValue());
+            out.close();
+            logger.info("Leaving AddKeyValueServlet");
+
+
         }
-        else if(keyType.equals("HASH")){
-            RedisKey<Map<String,String>> redisKeyValue = getHashKeyValueFromRequest(request);
-            status = redisAccessModel.addHashKeyValue(redisKeyValue.key,redisKeyValue.value);
+        catch (NoGeneralUserLoginException e) {
+            e.printStackTrace();
         }
-        else if(keyType.equals("LIST")){
-            RedisKey<List<String>> redisKeyValue = getListKeyValueFromRequest(request);
-            status = redisAccessModel.addListKeyValue(redisKeyValue.key,redisKeyValue.value);
-        }
-        else if(keyType.equals("SET")){
-            RedisKey<Set<String >> redisKeyValue = getSetKeyValueFromRequest(request);
-            status = redisAccessModel.addSetKeyValue(redisKeyValue.key,redisKeyValue.value);
-        }
-        else if(keyType.equals("ZSET")){
-            RedisKey<Set<Tuple>> redisKeyValue = getZsetKeyValueFromRequest(request);
-            status = redisAccessModel.addZsetKeyValue(redisKeyValue.key, redisKeyValue.value);
-        }
-        logger.info(status);
-        out.println(status.getValue());
-        out.close();
-        logger.info("Leaving AddKeyValueServlet");
+
+
+
+
     }
 
     private RedisKey<String> getStringKeyValueFromRequest(HttpServletRequest request) {

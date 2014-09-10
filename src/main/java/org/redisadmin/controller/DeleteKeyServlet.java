@@ -1,12 +1,11 @@
 package org.redisadmin.controller;
 
 import org.redisadmin.model.RedisAccessModel;
+import org.redisadmin.model.Server;
+import org.redisadmin.model.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -20,16 +19,24 @@ public class DeleteKeyServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
 
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
+        try {
+            HttpSession session = request.getSession();
+            UserSession.GeneralUserLoginValidation(session);
 
-        String key = request.getParameter("key");
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
+            String key = request.getParameter("key");
+            RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(session);
 
-        redisAccessModel.deleteKey(key);
+            redisAccessModel.deleteKey(key);
+            out.println("true");
+        }
+        catch (NoGeneralUserLoginException e) {
+            out.println("nologin");
+        }
+        finally {
+            out.close();
+        }
+
 
     }
 }

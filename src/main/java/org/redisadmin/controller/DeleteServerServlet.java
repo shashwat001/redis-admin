@@ -2,7 +2,6 @@ package org.redisadmin.controller;
 
 import org.redisadmin.model.Server;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 /**
  * Created by shashwat001 on 10/9/14.
@@ -24,7 +22,7 @@ public class DeleteServerServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         try {
-            LoginSessionValidation.AdminUser(session);
+            UserSession.AdminUserLoginValidation(session);
 
             String host = request.getParameter("host");
             int port = Integer.parseInt(request.getParameter("port"));

@@ -21,22 +21,26 @@ public class AddServerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try {
+            UserSession.AdminUserLoginValidation(request.getSession());
+
             String host = request.getParameter("host");
             int port = Integer.parseInt(request.getParameter("port"));
             Server server = new Server(host,port);
-            server.add();
-            out.append("true");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            out.append("false");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            out.append("false");
-        } catch (Exception e){
-            out.append("false");
+            if(server.add()){
+                out.println("true");
+            }
+            else
+                out.println("false");
+        } catch (NoAdminLoginException e) {
+            out.println("noadmin");
+        } catch (NoGeneralUserLoginException e) {
+            out.println("nologin");
         }
         finally {
             out.close();
         }
+
+
+
     }
 }

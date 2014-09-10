@@ -1,14 +1,26 @@
+<%@ page import="org.redisadmin.controller.UserSession" %>
+<%@ page import="org.redisadmin.controller.NoGeneralUserLoginException" %>
 <%
+    try {
+        UserSession.GeneralUserLoginValidation(session);
+        System.out.println("valid user");
+    }
+    catch (NoGeneralUserLoginException e){
+        System.out.println("invalid user");
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
     String host = request.getParameter("host");
     String port = request.getParameter("port");
-    Cookie hostCookie = new Cookie("host",host);
-    Cookie portCookie = new Cookie("port",port);
-    response.addCookie(hostCookie);
-    response.addCookie(portCookie);
+
+    session.setAttribute("host",host);
+    session.setAttribute("port",port);
 
 %>
 
 <ul class="nav nav-tabs" role="tablist">
+    <li><a data-toggle="tab" href="#initialInformation" >Session Info</a></li>
     <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">List Keys <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -24,7 +36,7 @@
     <%--<li class="active"><a data-toggle="tab" href="#sectionA">List Keys</a></li>--%>
     <li><a data-toggle="tab" href="#tabSearch" onclick="actionSearch('tabSearch')" >Search</a></li>
     <li><a data-toggle="tab" href="#tabInsert" onclick="actionInsert('tabInsert')" >Insert</a></li>
-    <li><a data-toggle="tab" href="#tabInfo" onclick="actionInfo('tabInfo')" >Info</a></li>
+    <li><a data-toggle="tab" href="#tabInfo" onclick="actionInfo('tabInfo')" >Session Info</a></li>
 </ul>
 
 <div class="tab-content">

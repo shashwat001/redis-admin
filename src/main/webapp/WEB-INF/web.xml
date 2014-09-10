@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>GetKeyValuesServlet</servlet-name>
-        <servlet-class>org.redisadmin.controller.GetKeyValuesServlet</servlet-class>
+        <servlet-class>org.redisadmin.controller.GetValuefromKeyServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddKeyValueServlet</servlet-name>

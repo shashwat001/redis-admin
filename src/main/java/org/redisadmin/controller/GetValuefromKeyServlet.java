@@ -6,7 +6,6 @@ import org.redisadmin.model.RedisAccessModel;
 import redis.clients.jedis.Tuple;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +13,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by shashwat001 on 1/9/14.
  */
-public class GetKeyValuesServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(GetKeyValuesServlet.class);
+public class GetValuefromKeyServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(GetValuefromKeyServlet.class);
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -28,41 +26,42 @@ public class GetKeyValuesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("Entering GetKeyValueServlet");
         PrintWriter out = response.getWriter();
-        Cookie[] cookies = null;
-        cookies = request.getCookies();
+        try {
+            UserSession.GeneralUserLoginValidation(request.getSession());
+            RedisAccessModel redisAccessModel = UserSession.getRedisAccessModelObject(request.getSession());
 
-        //cookies 0:jsessiodID 1:host 2:port
-        String host = cookies[1].getValue();
-        int port = Integer.parseInt(cookies[2].getValue());
-        logger.info("Host:"+host+"  Port: "+port);
+            String key = request.getParameter("key");
+            String keyType = request.getParameter("type");
+            String valueJSON = "";
 
-        RedisAccessModel redisAccessModel = new RedisAccessModel(host,port);
+            if(keyType.equals("STRING")){
+                valueJSON = getStringJSON(redisAccessModel,key);
+            }
+            else if(keyType.equals("HASH")){
+                valueJSON = getHashJSON(redisAccessModel,key);
+            }
+            else if(keyType.equals("LIST")){
+                valueJSON = getListJSON(redisAccessModel,key);
+            }
+            else if(keyType.equals("SET")){
+                valueJSON = getSetJSON(redisAccessModel,key);
+            }
+            else if(keyType.equals("ZSET")){
+                valueJSON = getZsetJSON(redisAccessModel,key);
+            }
+            else{
+                logger.error("Invalid key type");
+            }
+            out.write(valueJSON);
+        } catch (NoGeneralUserLoginException e) {
+            out.write("nologin");
+        }
 
-        String key = request.getParameter("key");
-        String keyType = request.getParameter("type");
-        String valueJSON = "";
+        finally {
+            out.close();
+            logger.info("Leaving GetKeyValueServlet");
+        }
 
-        if(keyType.equals("STRING")){
-            valueJSON = getStringJSON(redisAccessModel,key);
-        }
-        else if(keyType.equals("HASH")){
-            valueJSON = getHashJSON(redisAccessModel,key);
-        }
-        else if(keyType.equals("LIST")){
-            valueJSON = getListJSON(redisAccessModel,key);
-        }
-        else if(keyType.equals("SET")){
-            valueJSON = getSetJSON(redisAccessModel,key);
-        }
-        else if(keyType.equals("ZSET")){
-            valueJSON = getZsetJSON(redisAccessModel,key);
-        }
-        else{
-            logger.error("Invalid key type");
-        }
-        out.write(valueJSON);
-        out.close();
-        logger.info("Leaving GetKeyValueServlet");
     }
 
     private String getListJSON(RedisAccessModel redisAccessModel, String key) {
